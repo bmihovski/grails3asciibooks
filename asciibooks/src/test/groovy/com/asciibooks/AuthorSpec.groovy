@@ -32,4 +32,40 @@ class AuthorSpec extends Specification implements DomainUnitTest<Author> {
             author.active
 
     }
+
+    void "Happy path"() {
+        given:
+            domain.name = "Eric"
+            domain.biography = "Author"
+
+        expect: "All constraints are satisfied"
+            domain.validate()
+    }
+
+    void "Missing name"() {
+        expect: "name is required"
+            !domain.validate(['name'])
+    }
+
+    @Unroll
+    void "Constrains: #name, #biography, #privateProfile isValid: #isValid"() {
+        given:
+            def address = new Address()
+        when:
+            domain.name = name
+            domain.biography = biography
+            domain.privateProfile = privateProfile
+            domain.address = address
+        then:
+            domain.validate() == isValid
+
+        where:
+            name    |   biography   |   privateProfile  ||  isValid
+            null    |   null        |   false           ||  false
+            "Eric"  |   "Author"    |   true            ||  true
+            "Eric"  |   "Author"    |   false           ||  true
+            "Eric"  |   null        |   true            ||  true
+            null    |   "Author"    |   null            ||  false
+
+    }
 }

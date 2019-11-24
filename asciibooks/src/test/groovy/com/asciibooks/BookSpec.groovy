@@ -35,4 +35,31 @@ class BookSpec extends Specification implements DomainUnitTest<Book> {
         then: "Price field is valid"
             domain.validate(['price'])
     }
+
+    @Unroll
+    void "Content can store #length chars"() {
+        when: "Given a long string"
+            domain.content = ("a" * lenght)
+        then: "Content is valid"
+            domain.validate(['content'])
+        where:
+            lenght << [256, 100_000]
+    }
+
+    @Unroll
+    void "Test Book.getFormattedPrice() Cents: #price Formatted: #formatted"() {
+        given:
+            domain.price = price
+
+        expect:
+            domain.formattedPrice == formatted
+
+        where:
+            price   || formatted
+            1       || '$0.01'
+            100     || '$1.00'
+            110     || '$1.10'
+            111     || '$1.11'
+            1_000_00|| '$1,000.00'
+    }
 }
