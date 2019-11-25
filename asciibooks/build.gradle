@@ -73,6 +73,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
 
     testCompile "org.grails.plugins:build-test-data:3.3.0.RC1"
+    compile 'org.grails.plugins:spring-security-core:4.0.0.RC2'
 }
 
 bootRun {
