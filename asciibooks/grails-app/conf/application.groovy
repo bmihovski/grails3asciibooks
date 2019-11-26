@@ -6,6 +6,7 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.asciibooks
 grails.plugin.springsecurity.authority.className = 'com.asciibooks.Role'
 grails.plugin.springsecurity.userLookup.usernamePropertyName = 'email'
 grails.plugin.springsecurity.userLookup.usernameIgnoreCase = true
+grails.plugin.springsecurity.rest.token.storage.jwt.secret = 'qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
@@ -20,10 +21,17 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [
+	// Stateless chain
+	[pattern: '/api/**',
+	 	filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter, -exceptionTranslationFilter,' +
+				'-authenticationProcessingFilter, -securityContextPersistenceFilter,' +
+				'-rememberMeAuthenticationFilter'],
+	// Traditional chain
+	[pattern: '/**',
+	 	filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'],
 	[pattern: '/assets/**',      filters: 'none'],
 	[pattern: '/**/js/**',       filters: 'none'],
 	[pattern: '/**/css/**',      filters: 'none'],
 	[pattern: '/**/images/**',   filters: 'none'],
 	[pattern: '/**/favicon.ico', filters: 'none'],
-	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
