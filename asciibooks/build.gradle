@@ -75,6 +75,7 @@ dependencies {
     testCompile "org.grails.plugins:build-test-data:3.3.0.RC1"
     compile 'org.grails.plugins:spring-security-core:4.0.0.RC2'
     compile 'org.grails.plugins:spring-security-rest:3.0.0.RC1'
+    compile 'org.grails:grails-datastore-rest-client:5.0.0.RC2'
 }
 
 bootRun {
