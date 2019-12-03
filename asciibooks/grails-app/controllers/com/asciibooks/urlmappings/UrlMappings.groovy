@@ -1,4 +1,4 @@
-package asciibooks
+package com.asciibooks.urlmappings
 
 class UrlMappings {
 

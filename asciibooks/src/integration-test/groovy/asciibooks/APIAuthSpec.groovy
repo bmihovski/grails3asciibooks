@@ -32,9 +32,7 @@ class APIAuthSpec extends Specification {
         UserRole.create(author, authorRole)
         UserRole.create(authorCaseInsensitive, authorRole)
     }
-    // end::setupAPISpec[]
 
-    // tag::APILogin[]
     def cleanup() {
         UserRole.executeUpdate 'delete UserRole'
         User.executeUpdate 'delete User'
@@ -72,44 +70,4 @@ class APIAuthSpec extends Specification {
         "bob@grails3book.com"    | "YetAnotherStrong!23"
         "BOB@grails3book.com"    | "YetAnotherStrong!23"
     }
-    // end::APILogin[]
-
-    // tag::APILoginBad[]
-    void "login with bad creds"() {
-        when:
-        def resp = rest.post("${baseUrl}/api/login") {
-            json {
-                email = "bad"
-                password = "bad"
-            }
-        }
-        def contentType = resp.headers.contentType
-
-        then:
-        resp.status == UNAUTHORIZED.value()
-        !contentType
-
-        and:
-        !resp.json
-    }
-    // end::APILoginBad[]
-
-    // tag::APILoginBadMethod[]
-    @Unroll
-    void "Cant use #method on /api/login"() {
-        when:
-        def resp = rest."$method"("${baseUrl}/api/login")
-        def contentType = resp.headers.contentType
-
-        then:
-        resp.status == METHOD_NOT_ALLOWED.value()
-        !contentType
-
-        and:
-        !resp.json
-
-        where:
-        method << ["get", "put", "delete"]
-    }
-    // end::APILoginBadMethod[]
 }
