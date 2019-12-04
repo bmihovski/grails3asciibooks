@@ -42,32 +42,63 @@ class APIAuthSpec extends Specification {
     @Unroll
     void "login with #emailAddress"() {
         when:
-        def resp = rest.post("${baseUrl}/api/login") {
-            json {
-                email = emailAddress
-                password = userPassword
+            def resp = rest.post("${baseUrl}/api/login") {
+                json {
+                    email = emailAddress
+                    password = userPassword
+                }
             }
-        }
-        def contentType = resp.headers.getContentType()
+            def contentType = resp.headers.getContentType()
 
         then:
-        resp.status == OK.value()
-        contentType.subtype == 'json'
-        contentType.type == 'application'
+            resp.status == OK.value()
+            contentType.subtype == 'json'
+            contentType.type == 'application'
 
         and:
-        resp.json.username.toLowerCase() == emailAddress.toLowerCase()
+            resp.json.username.toLowerCase() == emailAddress.toLowerCase()
         and:
-        resp.json.access_token
-        resp.json.refresh_token
-        resp.json.token_type == "Bearer"
-        resp.json.expires_in == 3600
+            resp.json.access_token
+            resp.json.refresh_token
+            resp.json.token_type == "Bearer"
+            resp.json.expires_in == 3600
 
         where:
-        emailAddress             | userPassword
-        "admin@asciibooks.com"   | "AStrongPass!23"
-        "author@grails3book.com" | "ADifferentStrongPass!23"
-        "bob@grails3book.com"    | "YetAnotherStrong!23"
-        "BOB@grails3book.com"    | "YetAnotherStrong!23"
+            emailAddress             | userPassword
+            "admin@asciibooks.com"   | "AStrongPass!23"
+            "author@grails3book.com" | "ADifferentStrongPass!23"
+            "bob@grails3book.com"    | "YetAnotherStrong!23"
+            "BOB@grails3book.com"    | "YetAnotherStrong!23"
     }
+
+    void "login with bad creds"() {
+        when:
+            def resp = rest.post("${baseUrl}/api/login") {
+                json {
+                    email = "bad"
+                    password = "bad"
+                }
+            }
+            def contentType = resp.headers.contentType
+        then:
+            resp.status == UNAUTHORIZED.value()
+            !contentType
+        and:
+            !resp.json
+    }
+
+    @Unroll
+    void "Cant use #method on /api/login"() {
+        when:
+            def resp = rest."$method"("${baseUrl}/api/login")
+            def contentType = resp.headers.contentType
+        then:
+            resp.status == METHOD_NOT_ALLOWED.value()
+            !contentType
+        and:
+            !resp.json
+        where:
+            method << ["get", "put", "delete"]
+    }
+
 }
