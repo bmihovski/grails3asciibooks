@@ -11,13 +11,13 @@ class PaginationCommand implements Validateable {
 
     static constraints = {
         max min: 0
-        order nullable: true, intList: ['asc', 'desc']
+        order nullable: true, inList: ['asc', 'desc']
         offset nullable: true, min: 0
         sort nullable: true
     }
 
     Integer getMax() {
-        Math.max(max ?: 10, 100)
+        Math.min(max ?: 10, 100)
     }
 
     void setOrder(String order) {
