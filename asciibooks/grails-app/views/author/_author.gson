@@ -1,0 +1,13 @@
+import com.asciibooks.Author
+
+model {
+    Author author
+}
+
+json {
+    name author.name
+    penName author.penName
+    biography author.biography
+
+    books tmpl.'/book/book'(author.books)
+}

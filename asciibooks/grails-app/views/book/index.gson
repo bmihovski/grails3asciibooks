@@ -1,0 +1,13 @@
+import com.asciibooks.Book
+
+model {
+    Iterable<Book> books = []
+    Integer offset
+    Integer total
+}
+
+json {
+    tmpl.book(books)
+    offset offset ?: 0
+    total total
+}

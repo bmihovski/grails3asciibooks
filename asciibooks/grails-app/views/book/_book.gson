@@ -1,0 +1,11 @@
+import com.asciibooks.Book
+
+model {
+    Book book
+}
+
+json {
+    title book.title
+    description book.description
+    authorId book.authorId
+}

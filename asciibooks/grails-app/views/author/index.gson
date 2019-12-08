@@ -1,0 +1,13 @@
+import com.asciibooks.Author
+
+model {
+    Iterable<Author> authors
+    Integer offset
+    Integer total
+}
+
+json {
+    authors tmpl.author(authors)
+    offset offset ?: 0
+    total total
+}

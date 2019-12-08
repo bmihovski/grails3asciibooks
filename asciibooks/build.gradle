@@ -11,6 +11,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.craigburke.client-dependencies' version '1.4.0'
+}
+
 version "0.1"
 group "asciibooks"
 
@@ -79,6 +83,18 @@ dependencies {
     compile 'org.grails.plugins:spring-security-rest:3.0.0.RC1'
     testCompile 'org.grails:grails-datastore-rest-client:6.1.12.RELEASE'
     compile 'org.grails.plugins:views-json:2.0.0.RC2'
+}
+
+clientDependencies {
+    yarn {
+        'bootstrap'('4.0.0-beta.2')
+        'jquery'('3.2.1') {
+            include 'jquery.js'
+        }
+        'moment'('2.19.2') {
+            include 'moment.js'
+        }
+    }
 }
 
 bootRun {

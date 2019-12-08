@@ -5,7 +5,8 @@
 // You're free to add application-wide JavaScript to this file, but it's generally better
 // to create separate JavaScript files as needed.
 //
-//= require jquery-3.3.1.min
-//= require bootstrap
-//= require popper.min
-//= require_self
+//= require jquery/jquery.js
+//= require popper.js/umd/popper.js
+//= require popper.js/umd/popper-utils.js
+//= require bootstrap/js/bootstrap.js
+//= require moment/moment.js
