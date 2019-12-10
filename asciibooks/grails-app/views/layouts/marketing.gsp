@@ -18,8 +18,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#">AsciiBooks</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -32,8 +31,7 @@
                     <a class="nav-link" href="${createLink(controller: 'login', action: 'auth')}">Login</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">Books</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="#">Top 10</a>
                         <a class="dropdown-item" href="#">List</a>

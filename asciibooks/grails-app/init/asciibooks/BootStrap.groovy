@@ -11,12 +11,11 @@ class BootStrap {
 
     def init = { servletContext ->
         if (Environment.current == Environment.DEVELOPMENT) {
-            createDevUsers()
             createDevData()
         }
     }
 
-    def createDevUsers() {
+    def createDevData() {
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
         def authorRole = new Role(authority: 'ROLE_AUTHOR').save(failOnError: true)
 
@@ -25,10 +24,8 @@ class BootStrap {
 
         UserRole.create(admin, adminRole)
         UserRole.create(author, authorRole)
-    }
 
-    def createDevData() {
-        def eric = new Author(name: "Eric Helgeson", biography: "Grails developer & Writer").save(failOnError: true)
+        def eric = new Author(name: "Eric Helgeson", biography: "Grails developer & Writer", user: author).save(failOnError: true)
         def grails3Book = new Book(author: eric, title: "Practical Grails 3", price: 100).save(failOnError: true)
         def boot1Book = new Book(author: eric, title: "Practical Spring Boot", price: 200).save(failOnError: true)
 

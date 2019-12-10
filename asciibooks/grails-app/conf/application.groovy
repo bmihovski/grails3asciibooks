@@ -4,6 +4,7 @@
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.asciibooks.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.asciibooks.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.asciibooks.Role'
+grails.plugin.springsecurity.authority.successHandler.defaultTargetUrl = '/dashboard'
 grails.plugin.springsecurity.userLookup.usernamePropertyName = 'email'
 grails.plugin.springsecurity.userLookup.usernameIgnoreCase = true
 grails.plugin.springsecurity.rest.login.usernamePropertyName = 'email'

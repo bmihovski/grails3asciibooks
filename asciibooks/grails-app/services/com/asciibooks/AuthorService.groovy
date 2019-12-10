@@ -33,7 +33,7 @@ class AuthorService implements DataBinder {
     }
 
     @Transactional
-    def update(Author author, Map props, boolean flush = false) {
+    Author update(Author author, Map props, boolean flush = false) {
         bindData(author, props)
         author.save(flush: flush)
         author

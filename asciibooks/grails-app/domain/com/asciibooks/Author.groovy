@@ -12,6 +12,8 @@ class Author {
 
     Address address = new Address()
 
+    User user
+
     Date lastUpdated
     Date dateCreated
 

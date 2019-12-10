@@ -26,7 +26,7 @@ class Book {
     }
 
     static mapping = {
-        content(type: "text")
+        content type: "text"
     }
 
     String getFormattedPrice() {
