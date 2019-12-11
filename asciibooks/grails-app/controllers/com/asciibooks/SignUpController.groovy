@@ -2,9 +2,10 @@ package com.asciibooks
 
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import grails.events.EventPublisher
 
 @Secured("permitAll")
-class SignUpController {
+class SignUpController implements EventPublisher {
 
     def join() {}
 
@@ -23,6 +24,7 @@ class SignUpController {
         user.save()
         UserRole.create(user, Role.findByAuthority('ROLE_AUTHOR'), false)
         flash.message = "Login with your email and password to continue."
+        notify 'author.signup', user.email
         redirect(controller: 'login')
     }
 
